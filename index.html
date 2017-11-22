@@ -16,7 +16,7 @@ input {
 <table>
 <tr>
 <td>
-<select id="slideA" onchange="slidedA()" size="15" style="text-align:right" />
+<select id="slideA" onchange="update('A', this.value)" size="15" style="text-align:right" />
 </td>
 <td>
 <table>
@@ -41,7 +41,7 @@ input {
 </table>
 </td>
 <td>
-<select id="slideB" onchange="slidedB()" size="15" style="text-align:right" />
+<select id="slideB" onchange="update('B', this.value)" size="15" style="text-align:right" />
 </td>
 </tr>
 </table>
@@ -102,16 +102,6 @@ function rackA() {
 
 function rackB() {
   var score = document.getElementById("rackB").value;
-  update("B", score);
-}
-
-function slidedA() {
-  var score = document.getElementById("slideA").value;
-  update("A", score);
-}
-
-function slidedB() {
-  var score = document.getElementById("slideB").value;
   update("B", score);
 }
 
