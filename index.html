@@ -40,14 +40,17 @@ input {
 <td>
 <table>
 <tr>
-<td> <input id="scoreA" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="scoreA" value="0" size="3" type="text" style="text-align:center" /> </td>
 <td>Score</td>
-<td> <input id="scoreB" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="scoreB" value="0" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 <tr>
-<td> <input id="rackA" onchange="rackA()" size="3" type="text" style="text-align:center" /> </td>
+<td><br><br><br></td>
+</tr>
+<tr>
+<td> <input id="rackA" value="0" onchange="rackA()" size="3" type="text" style="text-align:center" /> </td>
 <td>Rack</td>
-<td> <input id="rackB" onchange="rackB()" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackB" value="0" onchange="rackB()" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 </table>
 </td>
@@ -72,7 +75,28 @@ input {
 </td>
 </tr>
 </table>
+<p/>
+<input id="rackButton" value="New Rack" type="button" onclick="newRack()" />
+
 <script>
+function newRack(){
+  var slideA = parseInt(document.getElementById("slideA").value);
+  var slideB = parseInt(document.getElementById("slideB").value);
+  if(slideA+slideB != 14){
+    document.getElementById("rackButton").value = "New Rack -- Fix Rack Score!!!";
+    return;
+  }
+
+  document.getElementById("rackButton").value = "New Rack";
+  var scoreA = parseInt(document.getElementById("scoreA").value);
+  var scoreB = parseInt(document.getElementById("scoreB").value);
+  document.getElementById("scoreA").value = scoreA + slideA;
+  document.getElementById("scoreB").value = scoreB + slideB;
+
+  update("A", 0);
+  update("B", 0);
+}
+
 function update(who, score) {
   document.getElementById("rack"+who).value = score;
   document.getElementById("slide"+who).value = score;
