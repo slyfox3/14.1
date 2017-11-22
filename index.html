@@ -26,6 +26,11 @@ input {
 <td> <input id="scoreB" value="0" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 <tr>
+<td style="text-align:center"> <input id="foulA" value="Fouled" type="button" onclick="foul('A')" /> </td>
+<td></td>
+<td style="text-align:center"> <input id="foulB" value="Fouled" type="button" onclick="foul('B')" /> </td>
+</tr>
+<tr>
 <td><br><br><br></td>
 </tr>
 <tr>
@@ -82,6 +87,12 @@ function update(who, score) {
   var otherScore = Math.min(otherScore, 14-score);
   document.getElementById("rack"+other).value = otherScore;
   document.getElementById("slide"+other).value = otherScore;
+}
+
+function foul(who){
+  var id = "score" + who;
+  var score = parseInt(document.getElementById(id).value);
+  document.getElementById(id).value = --score;
 }
 
 function rackA() {
