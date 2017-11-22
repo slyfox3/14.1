@@ -14,28 +14,12 @@ input {
 </style>
 </head>
 
-<body>
+<body onload="init()">
 
 <table>
 <tr>
 <td>
-<select id="slideA" onchange="slidedA()" size="15" style="text-align:right">
-<option value="0">0</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-<option value="13">13</option>
-<option value="14">14</option>
-</select>
+<select id="slideA" onchange="slidedA()" size="15" style="text-align:right" />
 </td>
 <td>
 <table>
@@ -55,23 +39,7 @@ input {
 </table>
 </td>
 <td>
-<select id="slideB" onchange="slidedB()" size="15" style="text-align:right">
-<option value="0">0</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-<option value="13">13</option>
-<option value="14">14</option>
-</select>
+<select id="slideB" onchange="slidedB()" size="15" style="text-align:right" />
 </td>
 </tr>
 </table>
@@ -125,6 +93,21 @@ function slidedA() {
 function slidedB() {
   var score = document.getElementById("slideB").value;
   update("B", score);
+}
+
+function init(){
+  makeSlider("slideA");
+  makeSlider("slideB");
+}
+
+function makeSlider(id){
+  var select = document.getElementById(id);
+  for (var i = 0; i <= 14; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+  }
 }
 
 </script>
