@@ -11,7 +11,7 @@ input {
 </style>
 </head>
 
-<body onload="init()">
+<body id="root" onload="init()">
 
 <table>
 <tr>
@@ -51,15 +51,27 @@ function newRack(){
     document.getElementById("rackButton").value = "New Rack -- Fix Rack Score!!!";
     return;
   }
+  else{
+    document.getElementById("rackButton").value = "New Rack";
+  }
 
-  document.getElementById("rackButton").value = "New Rack";
   var scoreA = parseInt(document.getElementById("scoreA").value);
   var scoreB = parseInt(document.getElementById("scoreB").value);
   document.getElementById("scoreA").value = scoreA + slideA;
   document.getElementById("scoreB").value = scoreB + slideB;
+  appendHistory();
 
   update("A", 0);
   update("B", 0);
+}
+
+function appendHistory(){
+  var scoreA = parseInt(document.getElementById("scoreA").value);
+  var scoreB = parseInt(document.getElementById("scoreB").value);
+  var body = document.getElementById("root");
+  var history = document.createTextNode(scoreA + " : " + scoreB + "\n");
+  body.appendChild(history);
+  body.appendChild(document.createElement("br"));
 }
 
 function update(who, score) {
