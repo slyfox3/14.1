@@ -34,9 +34,9 @@ input {
 <td><br><br><br></td>
 </tr>
 <tr>
-<td> <input id="rackA" value="0" onchange="rackA()" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackA" value="0" onchange="update('A', parseInt(this.value))" size="3" type="text" style="text-align:center" /> </td>
 <td>Rack</td>
-<td> <input id="rackB" value="0" onchange="rackB()" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackB" value="0" onchange="update('B', parseInt(this.value))" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 </table>
 </td>
@@ -93,16 +93,6 @@ function foul(who){
   var id = "score" + who;
   var score = parseInt(document.getElementById(id).value);
   document.getElementById(id).value = --score;
-}
-
-function rackA() {
-  var score = document.getElementById("rackA").value;
-  update("A", score);
-}
-
-function rackB() {
-  var score = document.getElementById("rackB").value;
-  update("B", score);
 }
 
 function init(){
