@@ -83,10 +83,7 @@ function update(who, score) {
   document.getElementById("rack"+who).value = score;
   document.getElementById("slide"+who).value = score;
   var other = who == "A" ? "B" : "A";
-  var otherScore = document.getElementById("rack"+other).value;
-  var otherScore = Math.min(otherScore, 14-score);
-  document.getElementById("rack"+other).value = otherScore;
-  document.getElementById("slide"+other).value = otherScore;
+  adjustOptions(other, 0, 14-score);
 }
 
 function foul(who){
@@ -110,6 +107,21 @@ function makeSlider(id){
     select.appendChild(opt);
   }
 }
+
+function adjustOptions(who, low, high){
+  var id = "slide" + who;
+  var options = document.getElementById(id).getElementsByTagName("option");
+  for (var i = 0; i < options.length; i++) {
+    var val = parseInt(options[i].value);
+    if(low <= val && val <= high){
+      options[i].disabled = false;
+    }
+    else{
+      options[i].disabled = true;
+    }
+  }
+}
+
 </script>
 </body>
 </html>
