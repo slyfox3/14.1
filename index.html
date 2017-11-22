@@ -19,7 +19,7 @@ input {
 <table>
 <tr>
 <td>
-<select id="slideA" onchange="update()" size="15" style="text-align:right">
+<select id="slideA" onchange="slidedA()" size="15" style="text-align:right">
 <option value="0">0</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -45,14 +45,14 @@ input {
 <td> <input id="scoreB" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 <tr>
-<td> <input id="rackA" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackA" onchange="rackA()" size="3" type="text" style="text-align:center" /> </td>
 <td>Rack</td>
-<td> <input id="rackB" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackB" onchange="rackB()" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 </table>
 </td>
 <td>
-<select id="slideB" onchange="update()" size="15" style="text-align:right">
+<select id="slideB" onchange="slidedB()" size="15" style="text-align:right">
 <option value="0">0</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -73,10 +73,36 @@ input {
 </tr>
 </table>
 <script>
-function update() {
-  document.getElementById("rackA").value = document.getElementById("slideA").value;
-  document.getElementById("rackB").value = document.getElementById("slideB").value;
+function update(who, score) {
+  document.getElementById("rack"+who).value = score;
+  document.getElementById("slide"+who).value = score;
+  var other = who == "A" ? "B" : "A";
+  var otherScore = document.getElementById("rack"+other).value;
+  var otherScore = Math.min(otherScore, 14-score);
+  document.getElementById("rack"+other).value = otherScore;
+  document.getElementById("slide"+other).value = otherScore;
 }
+
+function rackA() {
+  var score = document.getElementById("rackA").value;
+  update("A", score);
+}
+
+function rackB() {
+  var score = document.getElementById("rackB").value;
+  update("B", score);
+}
+
+function slidedA() {
+  var score = document.getElementById("slideA").value;
+  update("A", score);
+}
+
+function slidedB() {
+  var score = document.getElementById("slideB").value;
+  update("B", score);
+}
+
 </script>
 </body>
 </html>
