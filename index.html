@@ -106,6 +106,7 @@ function makeSlider(id){
     var opt = document.createElement('option');
     opt.value = i;
     opt.innerHTML = i;
+    if(i==0) opt.selected = "selected";
     select.appendChild(opt);
   }
 }
