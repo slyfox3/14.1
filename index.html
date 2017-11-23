@@ -21,9 +21,9 @@ input {
 <td>
 <table>
 <tr>
-<td> <input id="scoreA" value="0" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="scoreA" onchange="setScore('A', parseInt(this.value))" value="0" size="3" type="text" style="text-align:center" /> </td>
 <td><u><b>Total</b></u></td>
-<td> <input id="scoreB" value="0" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="scoreB" onchange="setScore('B', parseInt(this.value))" value="0" size="3" type="text" style="text-align:center" /> </td>
 </tr>
 <tr>
 <td style="text-align:center"> <input id="foulA" value="Foul" type="button" onclick="foul('A')" /> </td>
@@ -155,6 +155,15 @@ function updateScore(){
   else{
     document.getElementById("scoreA").value = scoreA;
     document.getElementById("scoreB").value = scoreB;
+  }
+}
+
+function setScore(who, score){
+  if(who == "A"){
+    scoreA += score - scoreA;
+  }
+  else{
+    scoreB += score - scoreB;
   }
 }
 
