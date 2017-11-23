@@ -50,9 +50,13 @@ input {
 <input id="rackButton" value="New Rack" type="button" onclick="newRack()" />
 <p/>
 <input id="realtimeButton" type="button" onclick="switchScoreDisplay()" />
+<table id="history" style="text-align:right">
+<col width="auto">
+<col width="50">
+</table>
 
 <script>
-var scoreA = 0, scoreB = 0;
+var scoreA = 0, scoreB = 0, rackN = 0;
 var realtimeScore = "Realtime Score";
 var rackByRackScore = "Rack by Rack Score";
 
@@ -77,10 +81,12 @@ function newRack(){
 }
 
 function appendHistory(){
-  var body = document.getElementById("root");
-  var history = document.createTextNode(scoreA + " : " + scoreB + "\n");
-  body.appendChild(history);
-  body.appendChild(document.createElement("br"));
+  var historyTab = document.getElementById("history");
+  var row = historyTab.insertRow(rackN);
+  row.insertCell(0).innerHTML = "Rack #" + ++rackN;
+  row.insertCell(1).innerHTML = scoreA;
+  row.insertCell(2).innerHTML = ":";
+  row.insertCell(3).innerHTML = scoreB;
 }
 
 function updateRack(who, score) {
