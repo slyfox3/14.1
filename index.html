@@ -34,9 +34,9 @@ input {
 <td><br><br><br></td>
 </tr>
 <tr>
-<td> <input id="rackA" value="0" onchange="update('A', parseInt(this.value))" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackA" value="0" size="3" readonly="readonly" type="text" style="text-align:center" /> </td>
 <td>Rack</td>
-<td> <input id="rackB" value="0" onchange="update('B', parseInt(this.value))" size="3" type="text" style="text-align:center" /> </td>
+<td> <input id="rackB" value="0" size="3" readonly="readonly" type="text" style="text-align:center" /> </td>
 </tr>
 </table>
 </td>
@@ -81,7 +81,6 @@ function appendHistory(){
 
 function update(who, score) {
   document.getElementById("rack"+who).value = score;
-  document.getElementById("slide"+who).value = score;
   var other = who == "A" ? "B" : "A";
   adjustOptions(other, 0, 14-score);
 }
@@ -121,7 +120,6 @@ function adjustOptions(who, low, high){
     }
   }
 }
-
 </script>
 </body>
 </html>
