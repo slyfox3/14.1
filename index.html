@@ -47,9 +47,12 @@ input {
 </table>
 <p/>
 <input id="rackButton" value="New Rack" type="button" onclick="newRack()" />
+<input id="realtimeButton" type="button" onclick="switchScoreDisplay()" />
 
 <script>
 var scoreA = 0, scoreB = 0;
+var realtimeScore = "Realtime Score";
+var rackByRackScore = "Rack by Rack Score";
 
 function newRack(){
   var slideA = parseInt(document.getElementById("slideA").value);
@@ -83,6 +86,7 @@ function updateRack(who, score) {
   document.getElementById("slide"+who).selectedIndex = score;
   var other = who == "A" ? "B" : "A";
   adjustOptions(other, 0, 14-score);
+  updateScore();
 }
 
 function foul(who){
@@ -94,6 +98,7 @@ function foul(who){
 function init(){
   makeSlider("slideA");
   makeSlider("slideB");
+  document.getElementById("realtimeButton").value = realtimeScore;
 }
 
 function makeSlider(id){
@@ -122,8 +127,27 @@ function adjustOptions(who, low, high){
 }
 
 function updateScore(){
-  document.getElementById("scoreA").value = scoreA;
-  document.getElementById("scoreB").value = scoreB;
+  var realtimeBtn = document.getElementById("realtimeButton");
+  if(realtimeBtn.value == "Realtime Score"){
+    var rackA = parseInt(document.getElementById("rackA").value);
+    var rackB = parseInt(document.getElementById("rackB").value);
+    document.getElementById("scoreA").value = scoreA + rackA;
+    document.getElementById("scoreB").value = scoreB + rackB;
+  }
+  else{
+    document.getElementById("scoreA").value = scoreA;
+    document.getElementById("scoreB").value = scoreB;
+  }
+}
+
+function switchScoreDisplay(){
+  var realtimeBtn = document.getElementById("realtimeButton");
+  if(realtimeBtn.value == rackByRackScore)
+    realtimeBtn.value = realtimeScore;
+  else
+    realtimeBtn.value = rackByRackScore;
+
+  updateScore();
 }
 </script>
 </body>
