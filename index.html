@@ -45,8 +45,10 @@ input {
 </td>
 </tr>
 </table>
+<p id="tableBallCount"></p>
 <p/>
 <input id="rackButton" value="New Rack" type="button" onclick="newRack()" />
+<p/>
 <input id="realtimeButton" type="button" onclick="switchScoreDisplay()" />
 
 <script>
@@ -87,6 +89,15 @@ function updateRack(who, score) {
   var other = who == "A" ? "B" : "A";
   adjustOptions(other, 0, 14-score);
   updateScore();
+  updateBallCount();
+}
+
+function updateBallCount(){
+    var rackA = parseInt(document.getElementById("rackA").value);
+    var rackB = parseInt(document.getElementById("rackB").value);
+    var left = 15 - rackA - rackB;
+    document.getElementById("tableBallCount").innerHTML =
+      left + " ball" + (left!=1 ? "s" : "") + " left on the table";
 }
 
 function foul(who){
@@ -96,6 +107,7 @@ function foul(who){
 }
 
 function init(){
+  updateBallCount();
   makeSlider("slideA");
   makeSlider("slideB");
   document.getElementById("realtimeButton").value = realtimeScore;
