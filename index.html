@@ -16,7 +16,7 @@ input {
 <table>
 <tr>
 <td>
-<select id="slideA" onchange="update('A', this.value)" size="15" style="text-align:right" />
+<select id="slideA" onchange="updateRack('A', this.value)" size="15" style="text-align:right" />
 </td>
 <td>
 <table>
@@ -41,7 +41,7 @@ input {
 </table>
 </td>
 <td>
-<select id="slideB" onchange="update('B', this.value)" size="15" style="text-align:right" />
+<select id="slideB" onchange="updateRack('B', this.value)" size="15" style="text-align:right" />
 </td>
 </tr>
 </table>
@@ -49,6 +49,8 @@ input {
 <input id="rackButton" value="New Rack" type="button" onclick="newRack()" />
 
 <script>
+var scoreA = 0, scoreB = 0;
+
 function newRack(){
   var slideA = parseInt(document.getElementById("slideA").value);
   var slideB = parseInt(document.getElementById("slideB").value);
@@ -60,35 +62,33 @@ function newRack(){
     document.getElementById("rackButton").value = "New Rack";
   }
 
-  var scoreA = parseInt(document.getElementById("scoreA").value);
-  var scoreB = parseInt(document.getElementById("scoreB").value);
-  document.getElementById("scoreA").value = scoreA + slideA;
-  document.getElementById("scoreB").value = scoreB + slideB;
+  scoreA += slideA;
+  scoreB += slideB;
+  updateScore();
   appendHistory();
 
-  update("A", 0);
-  update("B", 0);
+  updateRack("A", 0);
+  updateRack("B", 0);
 }
 
 function appendHistory(){
-  var scoreA = parseInt(document.getElementById("scoreA").value);
-  var scoreB = parseInt(document.getElementById("scoreB").value);
   var body = document.getElementById("root");
   var history = document.createTextNode(scoreA + " : " + scoreB + "\n");
   body.appendChild(history);
   body.appendChild(document.createElement("br"));
 }
 
-function update(who, score) {
+function updateRack(who, score) {
   document.getElementById("rack"+who).value = score;
+  document.getElementById("slide"+who).selectedIndex = score;
   var other = who == "A" ? "B" : "A";
   adjustOptions(other, 0, 14-score);
 }
 
 function foul(who){
-  var id = "score" + who;
-  var score = parseInt(document.getElementById(id).value);
-  document.getElementById(id).value = --score;
+  if(who == "A") scoreA--;
+  else scoreB--;
+  updateScore();
 }
 
 function init(){
@@ -119,6 +119,11 @@ function adjustOptions(who, low, high){
       options[i].disabled = true;
     }
   }
+}
+
+function updateScore(){
+  document.getElementById("scoreA").value = scoreA;
+  document.getElementById("scoreB").value = scoreB;
 }
 </script>
 </body>
