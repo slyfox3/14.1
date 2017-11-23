@@ -103,7 +103,8 @@ function updateBallCount(){
     var rackB = parseInt(document.getElementById("rackB").value);
     var left = 15 - rackA - rackB;
     document.getElementById("tableBallCount").innerHTML =
-      left + " ball" + (left!=1 ? "s" : "") + " left on the table";
+      "<b>" + left + "</b>" +
+      " ball" + (left!=1 ? "s" : "") + " left on the table";
 }
 
 function foul(who){
