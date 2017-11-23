@@ -105,6 +105,8 @@ function updateBallCount(){
     document.getElementById("tableBallCount").innerHTML =
       "<b>" + left + "</b>" +
       " ball" + (left!=1 ? "s" : "") + " left on the table";
+
+    document.getElementById("rackButton").disabled = left != 1;
 }
 
 function foul(who){
