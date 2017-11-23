@@ -159,6 +159,16 @@ function updateScore(){
 }
 
 function setScore(who, score){
+  var realtimeBtn = document.getElementById("realtimeButton");
+  if(realtimeBtn.value == realtimeScore){
+    if(who == "A"){
+      score -= parseInt(document.getElementById("rackA").value);
+    }
+    else{
+      score -= parseInt(document.getElementById("rackB").value);
+    }
+  }
+
   if(who == "A"){
     scoreA += score - scoreA;
   }
