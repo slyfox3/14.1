@@ -25,15 +25,14 @@ input {
 <td style="text-align:center"><u><b>Total</b></u></td>
 <td> <input id="scoreB" onchange="setScore('B', parseInt(this.value))" value="0" size="3" type="text" style="text-align:center" /> </td>
 </tr>
-<tr>
+<tr height="40">
 <td style="text-align:center"> <input id="foulA" value="Foul" type="button" onclick="foul('A')" /> </td>
 <td>
 <input id="realtimeButton" type="button" onclick="switchScoreDisplay()" />
 </td>
 <td style="text-align:center"> <input id="foulB" value="Foul" type="button" onclick="foul('B')" /> </td>
 </tr>
-<tr>
-<td><br><br><br></td>
+<tr id="vspace" height="100">
 </tr>
 <tr>
 <td> <input id="rackA" value="0" size="3" readonly="readonly" type="text" style="text-align:center" /> </td>
